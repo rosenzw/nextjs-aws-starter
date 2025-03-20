@@ -10,6 +10,7 @@ export async function GET() {
     const response = await client.send(command)
     return Response.json({ objects: response.Contents || [] })
   } catch (error) {
-    return Response.json({ error: error.message })
+    console.error("Error fetching objects:", error)
+    return new Response(JSON.stringify({ error: "Error communicating with AWS. Check credentials" }), { status: 500 })
   }
 } 

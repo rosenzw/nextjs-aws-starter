@@ -2,7 +2,7 @@ import './globals.css'
 
 export const metadata = {
   title: 'Next.js',
-  description: 'AWS S3 Upload Example',
+  description: 'Starter NextJS application that integrates with AWS S3 and DynamoDB.',
 }
 
 export default function RootLayout({
