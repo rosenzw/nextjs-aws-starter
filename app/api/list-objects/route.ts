@@ -1,4 +1,12 @@
 import { S3Client, ListObjectsV2Command } from '@aws-sdk/client-s3'
+import { corsHeaders, corsResponse } from '../../lib/cors'
+
+export async function OPTIONS() {
+  return new Response(null, {
+    status: 204,
+    headers: corsHeaders(),
+  })
+}
 
 export async function GET() {
   try {
@@ -8,9 +16,9 @@ export async function GET() {
     })
 
     const response = await client.send(command)
-    return Response.json({ objects: response.Contents || [] })
+    return corsResponse(Response.json({ objects: response.Contents || [] }))
   } catch (error) {
     console.error("Error fetching objects:", error)
-    return new Response(JSON.stringify({ error: "Error communicating with AWS. Check credentials" }), { status: 500 })
+    return corsResponse(new Response(JSON.stringify({ error: "Error communicating with AWS. Check credentials" }), { status: 500 }))
   }
 } 
