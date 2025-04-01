@@ -1,14 +1,6 @@
 import { ScanCommand, PutCommand } from '@aws-sdk/lib-dynamodb'
 import { docClient } from '../../lib/dynamodb'
 import { v4 as uuidv4 } from 'uuid'
-import { corsHeaders, corsResponse } from '../../lib/cors'
-
-export async function OPTIONS() {
-  return new Response(null, {
-    status: 204,
-    headers: corsHeaders(),
-  })
-}
 
 export async function GET() {
   try {
@@ -17,9 +9,9 @@ export async function GET() {
     })
 
     const response = await docClient.send(command)
-    return corsResponse(Response.json({ items: response.Items || [] }))
+    return Response.json({ items: response.Items || [] })
   } catch (error) {
-    return corsResponse(Response.json({ error: error.message }))
+    return Response.json({ error: error.message })
   }
 }
 
@@ -42,8 +34,8 @@ export async function POST(request: Request) {
     })
 
     await docClient.send(command)
-    return corsResponse(Response.json(item))
+    return Response.json(item)
   } catch (error) {
-    return corsResponse(Response.json({ error: error.message }))
+    return Response.json({ error: error.message })
   }
 } 

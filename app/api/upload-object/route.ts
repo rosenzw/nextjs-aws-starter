@@ -1,13 +1,5 @@
 import { createPresignedPost } from '@aws-sdk/s3-presigned-post'
 import { S3Client } from '@aws-sdk/client-s3'
-import { corsHeaders, corsResponse } from '../../lib/cors'
-
-export async function OPTIONS() {
-  return new Response(null, {
-    status: 204,
-    headers: corsHeaders(),
-  })
-}
 
 export async function POST(request: Request) {
   const { filename, contentType } = await request.json()
@@ -30,8 +22,8 @@ export async function POST(request: Request) {
 
     console.log(url);
 
-    return corsResponse(Response.json({ url, fields }))
+    return Response.json({ url, fields })
   } catch (error) {
-    return corsResponse(Response.json({ error: error.message }))
+    return Response.json({ error: error.message })
   }
 }
