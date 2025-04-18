@@ -3,13 +3,13 @@ import { docClient } from '../../../lib/dynamodb'
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const command = new DeleteCommand({
       TableName: process.env.AWS_DATABASE_TABLE,
       Key: {
-        id: params.id,
+        id: (await params).id,
       },
     })
 
