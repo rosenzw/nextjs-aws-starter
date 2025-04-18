@@ -24,6 +24,32 @@ These steps describe how to install this application
 2. Create an S3 bucket and a DynamoDB database table
 3. Configure the names for the bucket and table in the .env.local file.  Use the .env.example as a starting point.
 
+### S3 CORS requirement
+You will need to enable CORS in order to allow the client to push files directly into the bucket.  To configure this, go to your bucket in the AWS Console->Permissions and set the CORS configuration JSON to the following:
+```
+[
+    {
+        "AllowedHeaders": [
+            "*"
+        ],
+        "AllowedMethods": [
+            "POST",
+            "PUT",
+            "GET",
+            "HEAD"
+        ],
+        "AllowedOrigins": [
+            "http://localhost:3000",
+            "<any other origins such as the deployed endpoint for the app>"
+        ],
+        "ExposeHeaders": [
+            "ETag"
+        ],
+        "MaxAgeSeconds": 3000
+    }
+]
+```
+
 ## How to Use
 
 1. At the top of the working directory, start the NextJS dev environment with

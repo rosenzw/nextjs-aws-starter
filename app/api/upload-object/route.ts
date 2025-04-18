@@ -20,8 +20,6 @@ export async function POST(request: Request) {
       Expires: 600, // Seconds before the presigned post expires. 3600 by default.
     })
 
-    console.log(url);
-
     return Response.json({ url, fields })
   } catch (error) {
     return Response.json({ error: error.message })
