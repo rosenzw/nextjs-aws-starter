@@ -1,5 +1,7 @@
 import './globals.css'
 
+import { Analytics } from "@vercel/analytics/react"
+
 export const metadata = {
   title: 'Next.js',
   description: 'Starter NextJS application that integrates with AWS S3 and DynamoDB.',
@@ -12,7 +14,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   )
 }
