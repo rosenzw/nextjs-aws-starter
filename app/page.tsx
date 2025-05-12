@@ -2,7 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import { DynamoEntry } from './lib/dynamodb'
+import dynamic from 'next/dynamic'
 
+const AdBanner = dynamic(() => import('./components/AdBanner'), {
+  ssr: false
+});
 
 interface S3Object {
   Key: string
@@ -350,6 +354,7 @@ export default function Page() {
         <CreateEntry fields={fields} updateField={updateField} removeField={removeField} addField={addField} handleNewEntrySubmit={handleNewEntrySubmit} />
         <S3BucketContents objects={objects} />
         <DatabaseEntries entries={entries} handleDelete={handleDelete} />
+        <AdBanner />
       </div>
     </main>
   )
