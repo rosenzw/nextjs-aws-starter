@@ -354,7 +354,6 @@ export default function Page() {
         <CreateEntry fields={fields} updateField={updateField} removeField={removeField} addField={addField} handleNewEntrySubmit={handleNewEntrySubmit} />
         <S3BucketContents objects={objects} />
         <DatabaseEntries entries={entries} handleDelete={handleDelete} />
-        <AdBanner />
       </div>
     </main>
   )

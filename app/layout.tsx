@@ -1,7 +1,7 @@
 import './globals.css'
 import Script from 'next/script'
-
 import { Analytics } from "@vercel/analytics/react"
+import AdBanner from './components/AdBanner'
 
 export const metadata = {
   title: 'CS467 App Template',
@@ -21,6 +21,7 @@ export default function RootLayout({
       </head>
       <body>
         {children}
+        <AdBanner />
         <Analytics />
       </body>
     </html>
